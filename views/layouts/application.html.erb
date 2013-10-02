@@ -1,20 +1,104 @@
+<style>
+  body {
+    text-align: center;
+    background: #ccc;
+    font-family: "Helvetica Neue", Arial, Helvetica, sans-serif;
+    line-height: 1.6;
+  }
+  .container {
+    width: 550px;
+    margin: 2em auto;
+    text-align: left;
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0px 2px 4px rgba(0,0,0,.3);
+    /* padding: 15px; */
+  }
+  header, section, footer {
+    padding: 1px 30px;
+  }
+  header {
+    background: #C44632;
+    color: #fff;
+    border-radius: 12px 12px 0 0;
+  }
+  header h1 {
+    text-shadow: 1px 1px 1px rgba(0,0,0,.5);
+    text-align: center;
+    margin-bottom: 0;
+  }  
+  header h1 a {
+    color: #fff;
+    text-decoration: none;;
+  }
+  header nav {
+    text-align: center;
+  }
+  header nav a {
+    color: #fff;
+    display: inline-block;
+    padding: 5px;
+    margin: 5px;
+  }
+  footer {
+    padding-bottom: 10px;
+    color: #ccc;
+  }
+  dl {
+    border-left: 4px solid #eee;
+    padding-left: 10px;
+  }
+  dt, dd {
+    text-transform: capitalize;
+  }
+  dt {
+    float: left;
+    font-weight: bold;
+    clear: both;
+  }
+  dd {
+    margin: 0;
+  }
+  dt::after {
+    content: ": ";
+  }
+</style>
+
+<%
+  def link_to(name, url)
+    return "<a href='#{url}'>#{name}</a>"
+  end
+%>
+
 <html>
   <body>
-    <h1>You're using a layout</h1>
-    <p>
-      <h3> I'm a header</h3>
-      <p>Put things in the header</p>
-      <a href='me.html'>Me</a>
-
-    </p>
-    <hr />
-    <div>
-      <%= yield %>
-    </div>
-    <hr />
-    <div>
-      <h3> I'm a footer</h3>
-      <p>Put things in the footer</p>
+  <% @person = {name: "Josh", occupation: "web developer", favorite_color: "black"} %>
+  <div class="container">
+      <header>
+        <header>
+          <h1><a href="index.html">Profile for <%= @person[:name] %></a></h1>
+          <nav>
+            <%= link_to("Profile", "profile.html") %>
+            <%= link_to("Food for the Hungry", "http://fh.org") %>
+            <%= link_to("Blood Water Mission", "http://bloodwatermission.com") %>
+          </nav>
+        </header>
+      </header>
+      
+      <section class="content">
+        <%= yield %>
+      </section>
+      
+      <footer>
+        <p>
+          The time is now:
+          <%= Time.now %>
+        </p>
+        
+        <p>
+          Thanks for stopping by!
+        </p>
+      </footer>
     </div>
   </body>
 </html>
