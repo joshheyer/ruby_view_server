@@ -1,0 +1,88 @@
+<style>
+  body {
+    text-align: center;
+    background: #ccc;
+    font-family: "Helvetica Neue", Arial, Helvetica, sans-serif;
+    line-height: 1.6;
+  }
+  .container {
+    width: 550px;
+    margin: 2em auto;
+    text-align: left;
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0px 2px 4px rgba(0,0,0,.3);
+    /* padding: 15px; */
+  }
+  header, section, footer {
+    padding: 1px 30px;
+  }
+  header {
+    background: #C44632;
+    color: #fff;
+    border-radius: 12px 12px 0 0;
+  }
+  header h1 {
+    text-shadow: 1px 1px 1px rgba(0,0,0,.5);
+    text-align: center;
+  }  
+  footer {
+    padding-bottom: 10px;
+  }
+  dl {
+    border-left: 4px solid #eee;
+    padding-left: 10px;
+  }
+  dt, dd {
+    text-transform: capitalize;
+  }
+  dt {
+    float: left;
+    font-weight: bold;
+    clear: both;
+  }
+  dd {
+    margin: 0;
+  }
+  dt::after {
+    content: ": ";
+  }
+</style>
+
+
+
+<% @person = {name: "Josh", occupation: "web developer", favorite_color: "black"} %>
+<div class="container">
+  <header>
+    <h1>Profile for <%= @person[:name] %></h1>
+  </header>
+  
+  <section class="content">
+    <dl>
+      <% @person.each do |key, value| %>
+      <%= 
+        # get the string equivalent of the symbol
+        key_str = key.id2name 
+        if key_str["_"]
+          # replce _ with a space
+          key_str["_"] = " "
+        end
+      %>
+      
+      <dt><%= "#{key_str}" %></dt>
+      <dd> &nbsp; <%= " #{value}" %></dd>
+      <% end %>
+    </dl>
+  </section>
+  
+  <footer>
+    <p>
+      The time is now:
+      <%= Time.now %>
+    </p>
+    
+    <p>
+      Thanks for stopping by!
+    </p>
+  </footer>
+</div>
