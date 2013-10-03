@@ -72,13 +72,27 @@
 
 <html>
   <body>
+  
+  <!-- make use of the @request object to access the GET and POST data -->
+  <% if @request.query['first_name'] && !@request.query['first_name'].empty? %>
+    <!-- display welcome message -->
+    <p>Hello there <%= @request.query['first_name'] %>! You chose the color <%= @request.query['favorite_color'] %>.</p>
+  <% else %>
+    <!-- display form -->
+    <form method='post' action="<%= @request.path %>">
+        First name: <input type="text" name="first_name" placeholder='first name'/> <input type="submit" value="Submit" /><br>
+        Favorite color: <input type="radio" name="favorite_color" value="Red"> Red <input type="radio" name="favorite_color" value="Blue"> Blue <input type="radio" name="favorite_color" value="Green"> Green
+    </form>
+  <% end %>
+  
+  
   <% @person = {name: "Josh", occupation: "web developer", favorite_color: "black"} %>
   <div class="container">
       <header>
         <header>
-          <h1><a href="index.html">Profile for <%= @person[:name] %></a></h1>
+          <h1><a href="index">Profile for <%= @person[:name] %></a></h1>
           <nav>
-            <%= link_to("Profile", "profile.html") %>
+            <%= link_to("Profile", "profile") %>
             <%= link_to("Food for the Hungry", "http://fh.org") %>
             <%= link_to("Blood Water Mission", "http://bloodwatermission.com") %>
           </nav>
